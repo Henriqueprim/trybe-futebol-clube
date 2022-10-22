@@ -21,13 +21,13 @@ const validateExistence = async (req: Request, res: Response, next: NextFunction
 };
 
 const validateToken = async (token: string) => {
-  const validated = await jwt.verify(token, JWT_SECRET as string);
-  if (!validated) {
+  try {
+    const validated = await jwt.verify(token, JWT_SECRET as string);
+    const decoded = validated as jwt.JwtPayload;
+    return decoded;
+  } catch (error) {
     return false;
-    // return res.status(401).json({ message: 'Token must be a valid token' });
   }
-  const decoded = validated as jwt.JwtPayload;
-  return decoded;
 };
 
 export {

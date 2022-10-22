@@ -22,7 +22,7 @@ export default class MatchController {
     try {
       const match = req.body;
       const newMatch = await MatchServices.create(match);
-      return res.status(200).json(newMatch);
+      return res.status(201).json(newMatch);
     } catch (error) {
       console.log(error);
       next(error);
