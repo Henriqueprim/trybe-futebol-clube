@@ -9,7 +9,7 @@ const validations = [
 
 const matchRouter = express();
 
-matchRouter.get('/', MatchController.getAll);
+matchRouter.get('/', MatchController.getMatches);
 matchRouter.post('/', validations, MatchController.create);
 matchRouter.patch('/:id', MatchController.update);
 matchRouter.patch('/:id/finish', MatchController.finish);

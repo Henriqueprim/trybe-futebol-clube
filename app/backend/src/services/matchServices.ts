@@ -25,6 +25,16 @@ export default class MatchServices {
     return newMatch;
   }
 
+  static async filterMatches(inProgress: boolean) {
+    const matches = await Match.findAll({
+      include: [
+        { model: Team, as: 'teamHome', attributes: { exclude: ['id'] } },
+        { model: Team, as: 'teamAway', attributes: { exclude: ['id'] } },
+      ],
+      where: { inProgress } });
+    return matches;
+  }
+
   static async finishMatch(id: number) {
     const finished = await Match.update({ inProgress: false }, { where: { id } });
     return finished;

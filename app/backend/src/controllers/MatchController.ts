@@ -3,10 +3,15 @@ import MatchServices from '../services/matchServices';
 import Match from '../database/models/match';
 
 export default class MatchController {
-  static async getAll(_req: Request, res: Response, next: NextFunction) {
+  static async getMatches(req: Request, res: Response, next: NextFunction) {
     try {
-      const allMatches = await MatchServices.getAll();
-      return res.status(200).json(allMatches);
+      const { inProgress } = req.query;
+      if (inProgress == null) {
+        const matches = await MatchServices.getAll();
+        return res.status(200).json(matches);
+      }
+      const filteredMatches = await MatchServices.filterMatches(inProgress === 'true');
+      return res.status(200).json(filteredMatches);
     } catch (error) {
       console.log(error);
       next(error);
