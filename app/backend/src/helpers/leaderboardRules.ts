@@ -1,4 +1,4 @@
-import { IGoals, IHome, ILeaderboard } from '../interfaces/leaderboardInterface';
+import { IGoals, IMatch, ILeaderboard } from '../interfaces/leaderboardInterface';
 
 const totalPoints = (data: IGoals[]) => {
   let initialPoints = 0;
@@ -65,20 +65,36 @@ const SortingTeams = (data: ILeaderboard[]) => {
   return sorted;
 };
 
-const homeMatches = (data: IHome[]) => {
+const homeMatches = (data: IMatch[]) => {
   const performance = data.map((team) => ({
     name: team.teamName,
-    totalPoints: totalPoints(team.homeMatch),
-    totalGames: team.homeMatch.length,
-    totalVictories: totalVictories(team.homeMatch),
-    totalDraws: totalDraws(team.homeMatch),
-    totalLosses: totalLosses(team.homeMatch),
-    goalsFavor: goalsFavor(team.homeMatch),
-    goalsOwn: goalsOwn(team.homeMatch),
-    goalsBalance: goalsFavor(team.homeMatch) - goalsOwn(team.homeMatch),
-    efficiency: efficiency(team.homeMatch),
+    totalPoints: totalPoints(team.matchGoals),
+    totalGames: team.matchGoals.length,
+    totalVictories: totalVictories(team.matchGoals),
+    totalDraws: totalDraws(team.matchGoals),
+    totalLosses: totalLosses(team.matchGoals),
+    goalsFavor: goalsFavor(team.matchGoals),
+    goalsOwn: goalsOwn(team.matchGoals),
+    goalsBalance: goalsFavor(team.matchGoals) - goalsOwn(team.matchGoals),
+    efficiency: efficiency(team.matchGoals),
   })) as unknown as ILeaderboard[];
   return SortingTeams(performance);
 };
+
+// const awayMatches = (data: IHome[]) => {
+//   const performance = data.map((team) => ({
+//     name: team.teamName,
+//     totalPoints: totalPoints(team.awayMatch),
+//     totalGames: team.awayMatch.length,
+//     totalVictories: totalVictories(team.awayMatch),
+//     totalDraws: totalDraws(team.awayMatch),
+//     totalLosses: totalLosses(team.awayMatch),
+//     goalsFavor: goalsFavor(team.awayMatch),
+//     goalsOwn: goalsOwn(team.awayMatch),
+//     goalsBalance: goalsFavor(team.awayMatch) - goalsOwn(team.awayMatch),
+//     efficiency: efficiency(team.awayMatch),
+//   })) as unknown as ILeaderboard[];
+//   return SortingTeams(performance);
+// };
 
 export default homeMatches;

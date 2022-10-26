@@ -1,6 +1,6 @@
 import Team from '../database/models/team';
 import Match from '../database/models/match';
-import { IHome } from '../interfaces/leaderboardInterface';
+import { IMatch } from '../interfaces/leaderboardInterface';
 import homeMatches from '../helpers/leaderboardRules';
 
 export default class LeaderboardServices {
@@ -15,7 +15,7 @@ export default class LeaderboardServices {
         where: { inProgress: false },
       },
       attributes: { exclude: ['id'] },
-    }) as unknown as IHome[];
+    }) as unknown as IMatch[];
     return homeMatches(allHome);
   }
 
@@ -30,7 +30,7 @@ export default class LeaderboardServices {
         where: { inProgress: false },
       },
       attributes: { exclude: ['id'] },
-    });
-    return matches;
+    }) as unknown as IMatch[];
+    return homeMatches(matches);
   }
 }
