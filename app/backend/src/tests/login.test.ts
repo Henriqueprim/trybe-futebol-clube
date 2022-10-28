@@ -45,7 +45,46 @@ describe('Tests /login routes', () => {
     expect(chaiHttpResponse.body).to.have.property('token');
   });
 
-  it('Tests if some field is empty', () => {
-    expect(false).to.be.eq(true);
+  it('Tests if some field is empty', async () => {
+    chaiHttpResponse = await chai
+    .request(app)
+    .post('/login')
+    .send({
+      password: 'secret_admin',
+    })
+    expect(chaiHttpResponse.status).to.be.equal(400);
+    expect(chaiHttpResponse.body).to.be.equal({ message: 'All fields must be filled' });
   });
+
+  it('Tests if logs in with a wong password', async () => {
+    chaiHttpResponse = await chai
+    .request(app)
+    .post('/login')
+    .send({
+      email: 'admin@admin.com',
+      password: 'potato',
+    })
+    expect(chaiHttpResponse.status).to.be.equal(401);
+    expect(chaiHttpResponse.body).to.be.equal({ message: 'Incorrect email or password' });
+  })
 });
+
+// describe('Tests /login/validate', () => {
+//   let chaiHttpResponse: Response;
+
+//   beforeEach(async () => {
+//     sinon
+//       .stub(User, "findOne")
+//       .resolves({
+//         id: 1,
+//         username: 'Admin',
+//         role: 'admin',
+//         email: 'admin@admin.com',
+//         password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW',
+//       } as User);
+//   }); 
+
+//   afterEach(()=>{
+//     (User.findOne as sinon.SinonStub).restore();
+//   })
+// })
