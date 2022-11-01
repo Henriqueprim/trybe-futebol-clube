@@ -3,8 +3,8 @@ import { IGoals, IMatch, ILeaderboard } from '../interfaces/leaderboardInterface
 const totalPoints = (data: IGoals[]) => {
   let initialPoints = 0;
   data.forEach((match) => {
-    if (match.homeGoals > match.awayGoals) initialPoints += 3;
-    if (match.homeGoals === match.awayGoals) initialPoints += 1;
+    if (match.homeTeamGoals > match.awayTeamGoals) initialPoints += 3;
+    if (match.homeTeamGoals === match.awayTeamGoals) initialPoints += 1;
   });
   return initialPoints;
 };
@@ -12,7 +12,7 @@ const totalPoints = (data: IGoals[]) => {
 const totalVictories = (data: IGoals[]) => {
   let victories = 0;
   data.forEach((match) => {
-    if (match.homeGoals > match.awayGoals) victories += 1;
+    if (match.homeTeamGoals > match.awayTeamGoals) victories += 1;
   });
   return victories;
 };
@@ -20,7 +20,7 @@ const totalVictories = (data: IGoals[]) => {
 const totalDraws = (data: IGoals[]) => {
   let draws = 0;
   data.forEach((match) => {
-    if (match.homeGoals === match.awayGoals) draws += 1;
+    if (match.homeTeamGoals === match.awayTeamGoals) draws += 1;
   });
   return draws;
 };
@@ -28,7 +28,7 @@ const totalDraws = (data: IGoals[]) => {
 const totalLosses = (data: IGoals[]) => {
   let losses = 0;
   data.forEach((match) => {
-    if (match.homeGoals < match.awayGoals) losses += 1;
+    if (match.homeTeamGoals < match.awayTeamGoals) losses += 1;
   });
   return losses;
 };
@@ -36,7 +36,7 @@ const totalLosses = (data: IGoals[]) => {
 const goalsFavor = (data: IGoals[]) => {
   let goals = 0;
   data.forEach((match) => {
-    goals += match.homeGoals;
+    goals += match.homeTeamGoals;
   });
   return goals;
 };
@@ -44,7 +44,7 @@ const goalsFavor = (data: IGoals[]) => {
 const goalsOwn = (data: IGoals[]) => {
   let goals = 0;
   data.forEach((match) => {
-    goals += match.awayGoals;
+    goals += match.awayTeamGoals;
   });
   return goals;
 };
@@ -68,15 +68,15 @@ const SortingTeams = (data: ILeaderboard[]) => {
 const homeMatches = (data: IMatch[]) => {
   const performance = data.map((team) => ({
     name: team.teamName,
-    totalPoints: totalPoints(team.matchGoals),
-    totalGames: team.matchGoals.length,
-    totalVictories: totalVictories(team.matchGoals),
-    totalDraws: totalDraws(team.matchGoals),
-    totalLosses: totalLosses(team.matchGoals),
-    goalsFavor: goalsFavor(team.matchGoals),
-    goalsOwn: goalsOwn(team.matchGoals),
-    goalsBalance: goalsFavor(team.matchGoals) - goalsOwn(team.matchGoals),
-    efficiency: efficiency(team.matchGoals),
+    totalPoints: totalPoints(team.homeMatch),
+    totalGames: team.homeMatch.length,
+    totalVictories: totalVictories(team.homeMatch),
+    totalDraws: totalDraws(team.homeMatch),
+    totalLosses: totalLosses(team.homeMatch),
+    goalsFavor: goalsFavor(team.homeMatch),
+    goalsOwn: goalsOwn(team.homeMatch),
+    goalsBalance: goalsFavor(team.homeMatch) - goalsOwn(team.homeMatch),
+    efficiency: efficiency(team.homeMatch),
   })) as unknown as ILeaderboard[];
   return SortingTeams(performance);
 };

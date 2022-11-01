@@ -12,11 +12,11 @@ export interface ILeaderboard {
 }
 
 export interface IGoals {
-  homeGoals: number,
-  awayGoals: number,
+  homeTeamGoals: number,
+  awayTeamGoals: number,
 }
 
 export interface IMatch {
   teamName: string,
-  matchGoals: IGoals[],
+  homeMatch: IGoals[],
 }
