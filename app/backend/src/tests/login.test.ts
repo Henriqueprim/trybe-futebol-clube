@@ -68,23 +68,3 @@ describe('Tests /login routes', () => {
     expect(chaiHttpResponse.body).to.be.equal({ message: 'Incorrect email or password' });
   })
 });
-
-// describe('Tests /login/validate', () => {
-//   let chaiHttpResponse: Response;
-
-//   beforeEach(async () => {
-//     sinon
-//       .stub(User, "findOne")
-//       .resolves({
-//         id: 1,
-//         username: 'Admin',
-//         role: 'admin',
-//         email: 'admin@admin.com',
-//         password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW',
-//       } as User);
-//   }); 
-
-//   afterEach(()=>{
-//     (User.findOne as sinon.SinonStub).restore();
-//   })
-// })
