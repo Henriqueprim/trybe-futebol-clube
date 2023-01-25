@@ -81,20 +81,4 @@ const homeMatches = (data: IMatch[]) => {
   return SortingTeams(performance);
 };
 
-// const awayMatches = (data: IHome[]) => {
-//   const performance = data.map((team) => ({
-//     name: team.teamName,
-//     totalPoints: totalPoints(team.awayMatch),
-//     totalGames: team.awayMatch.length,
-//     totalVictories: totalVictories(team.awayMatch),
-//     totalDraws: totalDraws(team.awayMatch),
-//     totalLosses: totalLosses(team.awayMatch),
-//     goalsFavor: goalsFavor(team.awayMatch),
-//     goalsOwn: goalsOwn(team.awayMatch),
-//     goalsBalance: goalsFavor(team.awayMatch) - goalsOwn(team.awayMatch),
-//     efficiency: efficiency(team.awayMatch),
-//   })) as unknown as ILeaderboard[];
-//   return SortingTeams(performance);
-// };
-
 export default homeMatches;
