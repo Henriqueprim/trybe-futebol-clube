@@ -1,6 +1,6 @@
 
 # Trybe Futebol Clube :soccer:
-Projeto construído ao final do módulo de Back End da Trybe com o objetivo de pôr em prática o conteúdo ensinado até então.
+Projeto construído durante o módulo de Back End da Trybe com o objetivo de pôr em prática o conteúdo ensinado até então.
 
 ## Contexto :books:
 O projeto é um site informativo sobre partidas de futebol. Nele é possível:
